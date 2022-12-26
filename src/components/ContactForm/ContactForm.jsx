@@ -21,7 +21,13 @@ class ContactForm extends Component {
   handleSubmit = evt => {
     evt.preventDefault();
     const { name, number } = this.state;
-    this.props.onSubmit(name, number);
+    const { onSubmit, contacts } = this.props;
+
+    onSubmit(name, number);
+
+    if (contacts.find(contact => contact.name === name)) {
+      return;
+    }
 
     this.reset();
   };
